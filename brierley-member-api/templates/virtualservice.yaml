@@ -1,18 +1,18 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ .values.name }}
+  name: {{ include "brierley-member-api.fullname" . }}
 spec:
   hosts:
   - "*"
   gateways:
-  - {{ values.gateway }}
+  - brierley-gateway
   http:
   - match:
     - uri:
         prefix: /member/
     route:
     - destination:
-        host: {{ .values.name }}
+        host: brierley-members-api
         port:
           number: 80
